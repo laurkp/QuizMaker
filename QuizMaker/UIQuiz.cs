@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 using System.IO;
 using static QuizMaker.Logic;
+using System.Reflection.Metadata.Ecma335;
 
 namespace QuizMaker
 {
@@ -45,7 +46,11 @@ namespace QuizMaker
             List<int> correctAnswers = new List<int>();
 
             Console.Write("Enter the number of answers: \n");
-            int numAnswers = int.Parse(Console.ReadLine());
+            int numAnswers;
+            while(!int.TryParse(Console.ReadLine(), out numAnswers))
+            {
+                Console.WriteLine("Invalid input. Please choose how many answers the question has.");
+            }
 
             for (int i = 0; i < numAnswers; i++)
             {
