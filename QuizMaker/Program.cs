@@ -15,26 +15,26 @@ namespace QuizMaker
             while (true)
             {
                 // Prompt the user to choose a mode using UIQuiz.Choice() method
-                string mode = UIQuiz.Choice();
+                var mode = UIQuiz.Choice();
 
                 // Using a switch statement to handle the chosen mode
                 switch (mode)
                 {
-                    case "1":
+                    case UIQuiz.UserChoices.AddQuestion:
                         UIQuiz.AddQuestion();
                         break;
-                    case "2":
+                    case UIQuiz.UserChoices.StartQuiz:
                         UIQuiz.StartQuiz();
                         break;
-                    case "3":
+                    case UIQuiz.UserChoices.SaveToXml:
                         string saveFileName = UIQuiz.SaveFile();
                         UIQuiz.SaveQuestions(saveFileName);
                         break;
-                    case "4":
+                    case UIQuiz.UserChoices.LoadFromXml:
                         string loadFileName = UIQuiz.LoadFile();   
                         UIQuiz.LoadQuestions(loadFileName);
                         break;
-                    case "5":
+                    case UIQuiz.UserChoices.Quit:
                         Environment.Exit(0);
                         break;
                     default:

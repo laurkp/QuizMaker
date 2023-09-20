@@ -18,10 +18,21 @@ namespace QuizMaker
         public static List<Question> questions = new List<Question>();
 
         /// <summary>
+        /// enum to distinguish the user choices
+        /// </summary>
+        public enum UserChoices
+        {
+            AddQuestion = 1,
+            StartQuiz,
+            SaveToXml,
+            LoadFromXml,
+            Quit 
+        }
+        /// <summary>
         /// Display the main menu and return the user's choice
         /// </summary>
         /// <returns></returns>
-        public static string Choice()
+        public static UserChoices Choice()
         {
             Console.WriteLine("1.Add a Question");
             Console.WriteLine("2.Start Quiz");
@@ -29,9 +40,16 @@ namespace QuizMaker
             Console.WriteLine("4.Load Questions from XML");
             Console.WriteLine("5.Quit\n");
 
-            string choice = Console.ReadLine();
-
-            return choice;
+            if(Enum.TryParse(Console.ReadLine(), out UserChoices choice))
+            {
+                return choice;
+            }
+            else
+            {
+                Console.WriteLine("Invalid choice. Please select a valid option.");
+                return Choice();
+            }
+            
         }
 
         /// <summary>
@@ -58,9 +76,20 @@ namespace QuizMaker
                 string answer = Console.ReadLine();
                 answers.Add(answer);
 
-                Console.Write($"Is answer {i + 1} correct? (yes/no): \n");
-                string isCorrect = Console.ReadLine().ToLower();
-
+                string isCorrect;
+                while (true)
+                {
+                    Console.Write($"Is answer {i + 1} correct? (yes/no): \n");
+                    isCorrect = Console.ReadLine().ToLower();
+                    if (isCorrect == "yes" || isCorrect == "no")
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid input please write 'yes' or 'no' for the answer.");
+                    }
+                }
                 if (isCorrect == "yes")
                 {
                     correctAnswers.Add(i);
@@ -110,7 +139,7 @@ namespace QuizMaker
                     serializer.Serialize(stream, questions);
                 }
 
-                Console.WriteLine("Questions saved to {filename} successfully.\n");
+                Console.WriteLine($"Questions saved to {filename} successfully.\n");
             }
             catch (IOException e)
             {
@@ -160,7 +189,11 @@ namespace QuizMaker
             }
 
             Console.Write($"How many questions do you want to answer? (1-{questions.Count}):\n");
-            int numRounds = int.Parse(Console.ReadLine());
+            int numRounds;
+            while (!int.TryParse(Console.ReadLine(), out numRounds))
+            {
+                Console.WriteLine("Invalid input. Please choose how many questions do you want to answer.");
+            }
 
             if (numRounds < 1 || numRounds > questions.Count)
             {
