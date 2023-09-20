@@ -29,7 +29,7 @@ namespace QuizMaker
             // Property to store a list of indices representing correct choices
             [XmlArray("CorrectChoices")]
             [XmlArrayItem("CorrectChoice")]
-            public List<int> CorrectChoices { get; set; }
+            public List<int> CorrectChoiceIndexes { get; set; }
         }
     }
 }

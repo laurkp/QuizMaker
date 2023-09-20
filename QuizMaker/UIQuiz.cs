@@ -7,11 +7,14 @@ using System.Xml.Serialization;
 using System.IO;
 using static QuizMaker.Question;
 using System.Reflection.Metadata.Ecma335;
+using System.Security.Cryptography.X509Certificates;
 
 namespace QuizMaker
 {
     internal class UIQuiz
     {
+        public const char USER_CHOICE_YES = 'Y';
+        public const char USER_CHOICE_NO = 'N';
         /// <summary>
         /// Static list to store quiz questions
         /// </summary>
@@ -76,21 +79,22 @@ namespace QuizMaker
                 string answer = Console.ReadLine();
                 answers.Add(answer);
 
-                string isCorrect;
+                char isCorrect;
                 while (true)
                 {
-                    Console.Write($"Is answer {i + 1} correct? (yes/no): \n");
-                    isCorrect = Console.ReadLine().ToLower();
-                    if (isCorrect == "yes" || isCorrect == "no")
+                    Console.Write($"Is answer {i + 1} correct? ({USER_CHOICE_YES} = yes/{USER_CHOICE_NO} = no): \n");
+                    isCorrect = char.ToUpper(Console.ReadKey().KeyChar);
+                    Console.WriteLine();
+                    if (isCorrect == USER_CHOICE_YES || isCorrect == USER_CHOICE_NO)
                     {
                         break;
                     }
                     else
                     {
-                        Console.WriteLine("Invalid input please write 'yes' or 'no' for the answer.");
+                        Console.WriteLine("Invalid input please write 'Y' or 'N' for the answer.");
                     }
                 }
-                if (isCorrect == "yes")
+                if (isCorrect == USER_CHOICE_YES)
                 {
                     correctAnswers.Add(i);
                 }
@@ -100,7 +104,7 @@ namespace QuizMaker
             {
                 QuestionText = questionText,
                 Choices = answers,
-                CorrectChoices = correctAnswers
+                CorrectChoiceIndexes = correctAnswers
             };
 
             questions.Add(newQuestion);
@@ -236,7 +240,7 @@ namespace QuizMaker
                     }
                 }
 
-                if (userChoices.Count == question.CorrectChoices.Count && userChoices.All(c => question.CorrectChoices.Contains(c)))
+                if (userChoices.Count == question.CorrectChoiceIndexes.Count && userChoices.All(c => question.CorrectChoiceIndexes.Contains(c)))
                 {
                     Console.WriteLine("Correct!\n");
                     score++;
