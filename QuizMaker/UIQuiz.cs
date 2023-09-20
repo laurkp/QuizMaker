@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using System.IO;
-using static QuizMaker.Logic;
+using static QuizMaker.Question;
 using System.Reflection.Metadata.Ecma335;
 
 namespace QuizMaker
@@ -15,7 +15,7 @@ namespace QuizMaker
         /// <summary>
         /// Static list to store quiz questions
         /// </summary>
-        public static List<Question> questions = new List<Question>();
+        public static List<Questions> questions = new List<Questions>();
 
         /// <summary>
         /// enum to distinguish the user choices
@@ -96,7 +96,7 @@ namespace QuizMaker
                 }
             }
             // Creating a new Question object and add it to the questions list
-            Question newQuestion = new Question()
+            Questions newQuestion = new Questions()
             {
                 QuestionText = questionText,
                 Choices = answers,
@@ -133,7 +133,7 @@ namespace QuizMaker
         {
             try
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(List<Question>));
+                XmlSerializer serializer = new XmlSerializer(typeof(List<Questions>));
                 using (FileStream stream = new FileStream(filename, FileMode.Create))
                 {
                     serializer.Serialize(stream, questions);
@@ -154,10 +154,10 @@ namespace QuizMaker
         {
             try
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(List<Question>));
+                XmlSerializer serializer = new XmlSerializer(typeof(List<Questions>));
                 using (FileStream stream = new FileStream(filename, FileMode.Open))
                 {
-                    questions = (List<Question>)serializer.Deserialize(stream);
+                    questions = (List<Questions>)serializer.Deserialize(stream);
                 }
 
                 Console.WriteLine("Questions loaded successfully.\n");
@@ -201,7 +201,7 @@ namespace QuizMaker
                 return;
             }
 
-            List<Question> questionsToAsk = new List<Question>(questions);
+            List<Questions> questionsToAsk = new List<Questions>(questions);
 
             Random random = new Random();
 
@@ -209,11 +209,11 @@ namespace QuizMaker
             {
                 if (questionsToAsk.Count == 0)
                 {
-                    questionsToAsk = new List<Question>(questions);
+                    questionsToAsk = new List<Questions>(questions);
                 }
 
                 int randomIndex = random.Next(questionsToAsk.Count);
-                Question question = questionsToAsk[randomIndex];
+                Questions question = questionsToAsk[randomIndex];
 
                 Console.WriteLine(question.QuestionText);
 
