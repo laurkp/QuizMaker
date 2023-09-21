@@ -9,6 +9,11 @@ namespace QuizMaker
 {
     internal class Program
     {
+        /// <summary>
+        /// Static list to store quiz questions
+        /// </summary>
+        public static List<Question.Questions> questions = new List<Question.Questions>();
+
         static void Main(string[] args)
         {
             // Creating a continuous loop for the quiz program
