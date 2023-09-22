@@ -29,15 +29,15 @@ namespace QuizMaker
                         UIQuiz.AddQuestion();
                         break;
                     case UIQuiz.UserChoices.StartQuiz:
-                        UIQuiz.StartQuiz();
+                        Logic.StartQuiz();
                         break;
                     case UIQuiz.UserChoices.SaveToXml:
                         string saveFileName = UIQuiz.SaveFile();
-                        UIQuiz.SaveQuestions(saveFileName);
+                        Logic.SaveQuestions(saveFileName);
                         break;
                     case UIQuiz.UserChoices.LoadFromXml:
                         string loadFileName = UIQuiz.LoadFile();   
-                        UIQuiz.LoadQuestions(loadFileName);
+                        Logic.LoadQuestions(loadFileName);
                         break;
                     case UIQuiz.UserChoices.Quit:
                         Environment.Exit(0);
