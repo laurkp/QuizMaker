@@ -12,12 +12,15 @@ namespace QuizMaker
         /// Serialize and save the questions to a file with the given filename
         /// </summary>
         /// <param name="filename"></param>
-        public static void SaveQuestions(string filename)
+        public static void SaveQuestions( string filename)
         {
             try
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(List<Questions>));
-                using (FileStream stream = new FileStream(filename, FileMode.Create))
+
+                string folderPath = $@"E:\dssa\XML";
+                string fullPath = Path.Combine(folderPath, filename);
+                using (FileStream stream = new FileStream(fullPath, FileMode.Create))
                 {
                     serializer.Serialize(stream, Program.questions);
                 }
@@ -30,7 +33,6 @@ namespace QuizMaker
             }
         }
 
-
         /// <summary>
         /// Deserialize and load questions from a file with the given filename
         /// </summary>
@@ -40,7 +42,10 @@ namespace QuizMaker
             try
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(List<Questions>));
-                using (FileStream stream = new FileStream(filename, FileMode.Open))
+
+                string folderPath = $@"E:\dssa\XML";
+                string fullPath = Path.Combine(folderPath, filename);
+                using (FileStream stream = new FileStream(fullPath, FileMode.Open))
                 {
                     Program.questions = (List<Questions>)serializer.Deserialize(stream);
                 }
@@ -60,6 +65,7 @@ namespace QuizMaker
                 Console.WriteLine("Error during XML deserialization.\n");
             }
         }
+
         /// <summary>
         /// Start the quiz session
         /// </summary>
