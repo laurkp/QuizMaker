@@ -1,6 +1,4 @@
 ﻿
-using System.Xml.Serialization;
-using System.IO;
 using static QuizMaker.Question.Questions;
 using static QuizMaker.Question;
 
@@ -103,7 +101,7 @@ namespace QuizMaker
         /// Prompt the user to enter a file name to save questions
         /// </summary>
         /// <returns></returns>
-        public static string SaveFile()
+        public static string InputFileName()
         {
             Console.WriteLine("Enter a file name to save questions: \n");
             string saveFile = Console.ReadLine();
@@ -113,7 +111,7 @@ namespace QuizMaker
         /// Prompt the user to enter a file name to load questions
         /// </summary>
         /// <returns></returns>
-        public static string LoadFile()
+        public static string AskForFileName()
         {
             Console.WriteLine("Enter a file name to load questions: \n");
             string loadFile = Console.ReadLine();
