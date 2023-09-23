@@ -18,7 +18,8 @@ namespace QuizMaker
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(List<Question>));
 
-                string folderPath = $@"E:\dssa\XML";
+                string folderPath = "..\\XML";
+                Directory.CreateDirectory(folderPath);
                 string fullPath = Path.Combine(folderPath, filename);
                 using (FileStream stream = new FileStream(fullPath, FileMode.Create))
                 {
@@ -43,7 +44,7 @@ namespace QuizMaker
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(List<Question>));
 
-                string folderPath = $@"E:\dssa\XML";
+                string folderPath = "..\\XML";
                 string fullPath = Path.Combine(folderPath, filename);
                 using (FileStream stream = new FileStream(fullPath, FileMode.Open))
                 {
