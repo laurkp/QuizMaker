@@ -16,7 +16,7 @@ namespace QuizMaker
         {
             try
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(List<Questions>));
+                XmlSerializer serializer = new XmlSerializer(typeof(List<Question>));
 
                 string folderPath = $@"E:\dssa\XML";
                 string fullPath = Path.Combine(folderPath, filename);
@@ -41,13 +41,13 @@ namespace QuizMaker
         {
             try
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(List<Questions>));
+                XmlSerializer serializer = new XmlSerializer(typeof(List<Question>));
 
                 string folderPath = $@"E:\dssa\XML";
                 string fullPath = Path.Combine(folderPath, filename);
                 using (FileStream stream = new FileStream(fullPath, FileMode.Open))
                 {
-                    Program.questions = (List<Questions>)serializer.Deserialize(stream);
+                    Program.questions = (List<Question>)serializer.Deserialize(stream);
                 }
 
                 Console.WriteLine("Questions loaded successfully.\n");
@@ -92,7 +92,7 @@ namespace QuizMaker
                 return;
             }
 
-            List<Questions> questionsToAsk = new List<Questions>(Program.questions);
+            List<Question> questionsToAsk = new List<Question>(Program.questions);
 
             Random random = new Random();
 
@@ -100,11 +100,11 @@ namespace QuizMaker
             {
                 if (questionsToAsk.Count == 0)
                 {
-                    questionsToAsk = new List<Questions>(Program.questions);
+                    questionsToAsk = new List<Question>(Program.questions);
                 }
 
                 int randomIndex = random.Next(questionsToAsk.Count);
-                Questions question = questionsToAsk[randomIndex];
+                Question question = questionsToAsk[randomIndex];
 
                 Console.WriteLine(question.QuestionText);
 

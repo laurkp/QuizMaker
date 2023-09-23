@@ -7,7 +7,7 @@ namespace QuizMaker
         /// <summary>
         /// Static list to store quiz questions
         /// </summary>
-        public static List<Question.Questions> questions = new List<Question.Questions>();
+        public static List<Question> questions = new List<Question>();
 
         static void Main(string[] args)
         {

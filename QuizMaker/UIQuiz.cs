@@ -1,5 +1,5 @@
 ﻿
-using static QuizMaker.Question.Questions;
+
 using static QuizMaker.Question;
 
 
@@ -88,7 +88,7 @@ namespace QuizMaker
                 }
             }
             // Creating a new Question object and add it to the questions list
-            Question.Questions newQuestion = new Question.Questions()
+            Question newQuestion = new Question()
             {
                 QuestionText = questionText,
                 Choices = answers,

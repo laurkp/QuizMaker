@@ -4,14 +4,13 @@ using System.IO;
 
 namespace QuizMaker
 {
+    [Serializable]
     public class Question
     {
         /// <summary>
         /// Defining a serializable class called 'Question'
         /// </summary>
-        [Serializable]
-        public class Questions
-        {
+        
             // Adding XML serialization attributes
             // Property to store the text of the question
             [XmlElement("QuestionText")]
@@ -26,6 +25,6 @@ namespace QuizMaker
             [XmlArray("CorrectChoices")]
             [XmlArrayItem("CorrectChoice")]
             public List<int> CorrectChoiceIndexes { get; set; }
-        }
+        
     }
 }
