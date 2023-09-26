@@ -26,11 +26,11 @@ namespace QuizMaker
                     serializer.Serialize(stream, Program.questions);
                 }
 
-                Console.WriteLine($"Questions saved to {filename} successfully.\n");
+                UIQuiz.QuestionsSavedSuccesfully(filename);
             }
-            catch (IOException e)
+            catch (IOException)
             {
-                Console.WriteLine($"Error saving questions: {e.Message}\n");
+                UIQuiz.ErrorSavingFile();
             }
         }
 
@@ -51,19 +51,19 @@ namespace QuizMaker
                     Program.questions = (List<Question>)serializer.Deserialize(stream);
                 }
 
-                Console.WriteLine("Questions loaded successfully.\n");
+                UIQuiz.QuestionsLoadedSuccesfully();
             }
             catch (FileNotFoundException)
             {
-                Console.WriteLine("File not found. No questions loaded.\n");
+                UIQuiz.FileNotFound();
             }
-            catch (IOException e)
+            catch (IOException)
             {
-                Console.WriteLine($"Error loading questions: {e.Message}\n");
+                UIQuiz.ErrorLoadingQuestions();
             }
             catch (InvalidOperationException)
             {
-                Console.WriteLine("Error during XML deserialization.\n");
+                UIQuiz.ErrorDurringDeserialization();
             }
         }
 
@@ -76,20 +76,17 @@ namespace QuizMaker
 
             if (Program.questions.Count == 0)
             {
-                Console.WriteLine("No questions available. Please add questions first.\n");
+                UIQuiz.NoQuestions();
                 return;
             }
 
-            Console.Write($"How many questions do you want to answer? (1-{Program.questions.Count}):\n");
-            int numRounds;
-            while (!int.TryParse(Console.ReadLine(), out numRounds))
-            {
-                Console.WriteLine("Invalid input. Please choose how many questions do you want to answer.");
-            }
+            UIQuiz.HowManyQuestions();
+
+            int numRounds = UIQuiz.NumberOfRounds();
 
             if (numRounds < 1 || numRounds > Program.questions.Count)
             {
-                Console.WriteLine("Invalid number of rounds.\n");
+                UIQuiz.InvalidNumberOfRounds();
                 return;
             }
 
@@ -102,45 +99,23 @@ namespace QuizMaker
                 if (questionsToAsk.Count == 0)
                 {
                     questionsToAsk = new List<Question>(Program.questions);
-                }
+                } 
 
                 int randomIndex = random.Next(questionsToAsk.Count);
                 Question question = questionsToAsk[randomIndex];
 
-                Console.WriteLine(question.QuestionText);
+                UIQuiz.ShowQuestions(question);
 
                 for (int j = 0; j < question.Choices.Count; j++)
                 {
-                    Console.WriteLine($"{j + 1}.{question.Choices[j]}\n");
+                    UIQuiz.ShowAnswers(j, question);
                 }
 
-                Console.Write("Enter the number(s) of your answer(s) (comma-separated):\n");
-                string userInput = Console.ReadLine();
-                string[] userInpuArray = userInput.Split(',');
+                UIQuiz.InputTheNumberOfAnswers(score, numRounds, question);
 
-                List<int> userChoices = new List<int>();
-
-                foreach (var choice in userInpuArray)
-                {
-                    if (int.TryParse(choice.Trim(), out int choiceIndex) && choiceIndex >= 1 && choiceIndex <= question.Choices.Count)
-                    {
-                        userChoices.Add(choiceIndex - 1);
-                    }
-                }
-
-                if (userChoices.Count == question.CorrectChoiceIndexes.Count && userChoices.All(c => question.CorrectChoiceIndexes.Contains(c)))
-                {
-                    Console.WriteLine("Correct!\n");
-                    score++;
-                }
-                else
-                {
-                    Console.WriteLine("Incorrect.\n");
-                }
                 questionsToAsk.RemoveAt(randomIndex);
             }
 
-            Console.WriteLine($"You got {score}/{numRounds} correct.\n");
         }
     }
 }

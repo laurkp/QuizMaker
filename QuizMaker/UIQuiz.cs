@@ -1,6 +1,7 @@
 ﻿
 
 using static QuizMaker.Question;
+using static System.Formats.Asn1.AsnWriter;
 
 
 namespace QuizMaker
@@ -125,5 +126,100 @@ namespace QuizMaker
         {
             Console.WriteLine("Invalid choice. Please select a valid option.\n");
         }
+
+        public static void QuestionsSavedSuccesfully(string savedFile)
+        {
+            Console.WriteLine($"Questions saved to {savedFile} successfully.\n");
+        }
+
+        public static void ErrorSavingFile()
+        {
+            Console.WriteLine($"Error saving questions.\n");
+        }
+
+        public static void QuestionsLoadedSuccesfully()
+        {
+            Console.WriteLine("Questions loaded successfully.\n");
+        }
+
+        public static void FileNotFound()
+        {
+            Console.WriteLine("File not found. No questions loaded.\n");
+        }
+
+        public static void ErrorLoadingQuestions()
+        {
+            Console.WriteLine($"Error loading questions.\n");
+        }
+
+        public static void ErrorDurringDeserialization()
+        {
+            Console.WriteLine("Error during XML deserialization.\n");
+        }
+
+        public static void NoQuestions()
+        {
+            Console.WriteLine("No questions available. Please add questions first.\n");
+        }
+
+        public static void HowManyQuestions()
+        {
+            Console.Write($"How many questions do you want to answer? (1-{Program.questions.Count}):\n");
+        }
+
+        public static int NumberOfRounds()
+        {
+            int number;
+            while (!int.TryParse(Console.ReadLine(), out number))
+            {
+                Console.WriteLine("Invalid input. Please choose how many questions do you want to answer.");
+            }
+            return number;
+        }
+
+        public static void InvalidNumberOfRounds()
+        {
+            Console.WriteLine("Invalid number of rounds.\n");
+        }
+
+        public static void ShowQuestions(Question userQuestion)
+        {
+            Console.WriteLine(userQuestion.QuestionText);
+        }
+
+        public static void ShowAnswers(int questionAnswers, Question userQuestion)
+        {
+            Console.WriteLine($"{questionAnswers + 1}.{userQuestion.Choices[questionAnswers]}\n");
+        }
+
+        public static void InputTheNumberOfAnswers(int count, int numAnswers, Question userQuestion)
+        {
+            Console.Write("Enter the number(s) of your answer(s) (comma-separated):\n");
+            string userInput = Console.ReadLine();
+            string[] userInpuArray = userInput.Split(',');
+
+            List<int> userChoices = new List<int>();
+
+            foreach (var choice in userInpuArray)
+            {
+                if (int.TryParse(choice.Trim(), out int choiceIndex) && choiceIndex >= 1 && choiceIndex <= userQuestion.Choices.Count)
+                {
+                    userChoices.Add(choiceIndex - 1);
+                }
+            }
+
+            if (userChoices.Count == userQuestion.CorrectChoiceIndexes.Count && userChoices.All(c => userQuestion.CorrectChoiceIndexes.Contains(c)))
+            {
+                Console.WriteLine("Correct!\n");
+                count++;
+            }
+            else
+            {
+                Console.WriteLine("Incorrect.\n");
+            }
+
+            Console.WriteLine($"You got {count+1}/{numAnswers} correct.\n");
+        }
+
     }
 }
