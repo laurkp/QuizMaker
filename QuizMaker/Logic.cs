@@ -7,6 +7,7 @@ namespace QuizMaker
 {
     public class Logic
     {
+        public static Random random = new Random();
 
         /// <summary>
         /// Serialize and save the questions to a file with the given filename
@@ -92,8 +93,6 @@ namespace QuizMaker
 
             List<Question> questionsToAsk = new List<Question>(Program.questions);
 
-            Random random = new Random();
-
             for (int i = 0; i < numRounds; i++)
             {
                 if (questionsToAsk.Count == 0)
@@ -115,7 +114,6 @@ namespace QuizMaker
 
                 questionsToAsk.RemoveAt(randomIndex);
             }
-
         }
     }
 }

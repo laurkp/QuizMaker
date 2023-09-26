@@ -218,8 +218,7 @@ namespace QuizMaker
                 Console.WriteLine("Incorrect.\n");
             }
 
-            Console.WriteLine($"You got {count+1}/{numAnswers} correct.\n");
+            Console.WriteLine($"You got {count}/{numAnswers} correct.\n");
         }
-
     }
 }
