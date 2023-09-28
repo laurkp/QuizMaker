@@ -96,7 +96,7 @@ namespace QuizMaker
                 CorrectChoiceIndexes = correctAnswers
             };
 
-            Program.questions.Add(newQuestion);
+            Program.Questions.Add(newQuestion);
         }
         /// <summary>
         /// Prompt the user to enter a file name to save questions
@@ -164,7 +164,7 @@ namespace QuizMaker
 
         public static void HowManyQuestions()
         {
-            Console.Write($"How many questions do you want to answer? (1-{Program.questions.Count}):\n");
+            Console.Write($"How many questions do you want to answer? (1-{Program.Questions.Count}):\n");
         }
 
         public static int NumberOfRounds()

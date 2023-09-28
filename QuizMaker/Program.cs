@@ -7,7 +7,7 @@ namespace QuizMaker
         /// <summary>
         /// Static list to store quiz questions
         /// </summary>
-        public static List<Question> questions = new List<Question>();
+        public static List<Question> Questions = new List<Question>();
 
         static void Main(string[] args)
         {
@@ -24,7 +24,7 @@ namespace QuizMaker
                         UIQuiz.AddQuestion();
                         break;
                     case UIQuiz.UserChoices.StartQuiz:
-                        Logic.StartQuiz(questions);
+                        Logic.StartQuiz(Questions);
                         break;
                     case UIQuiz.UserChoices.SaveToXml:
                         string saveFileName = UIQuiz.InputFileName();

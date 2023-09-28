@@ -24,7 +24,7 @@ namespace QuizMaker
                 string fullPath = Path.Combine(folderPath, filename);
                 using (FileStream stream = new FileStream(fullPath, FileMode.Create))
                 {  
-                    serializer.Serialize(stream, Program.questions);
+                    serializer.Serialize(stream, Program.Questions);
                 }
 
                 UIQuiz.QuestionsSavedSuccesfully(filename);
@@ -49,7 +49,7 @@ namespace QuizMaker
                 string fullPath = Path.Combine(folderPath, filename);
                 using (FileStream stream = new FileStream(fullPath, FileMode.Open))
                 {
-                    Program.questions = (List<Question>)serializer.Deserialize(stream);
+                    Program.Questions = (List<Question>)serializer.Deserialize(stream);
                 }
 
                 UIQuiz.QuestionsLoadedSuccesfully();
