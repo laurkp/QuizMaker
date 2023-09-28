@@ -20,21 +20,21 @@ namespace QuizMaker
                 // Using a switch statement to handle the chosen mode
                 switch (mode)
                 {
-                    case UIQuiz.UserChoices.AddQuestion:
+                    case UIQuiz.GetUserChoice.AddQuestion:
                         UIQuiz.AddQuestion();
                         break;
-                    case UIQuiz.UserChoices.StartQuiz:
+                    case UIQuiz.GetUserChoice.StartQuiz:
                         Logic.StartQuiz(Questions);
                         break;
-                    case UIQuiz.UserChoices.SaveToXml:
+                    case UIQuiz.GetUserChoice.SaveToXml:
                         string saveFileName = UIQuiz.InputFileName();
                         Logic.SaveQuestions(saveFileName);
                         break;
-                    case UIQuiz.UserChoices.LoadFromXml:
+                    case UIQuiz.GetUserChoice.LoadFromXml:
                         string loadFileName = UIQuiz.AskForFileName();   
                         Logic.LoadQuestions(loadFileName);
                         break;
-                    case UIQuiz.UserChoices.Quit:
+                    case UIQuiz.GetUserChoice.Quit:
                         Environment.Exit(0);
                         break;
                     default:

@@ -14,7 +14,7 @@ namespace QuizMaker
         /// <summary>
         /// enum to distinguish the user choices
         /// </summary>
-        public enum UserChoices
+        public enum GetUserChoice
         {
             AddQuestion = 1,
             StartQuiz,
@@ -27,7 +27,7 @@ namespace QuizMaker
         /// Display the main menu and return the user's choice
         /// </summary>
         /// <returns></returns>
-        public static UserChoices Choice()
+        public static GetUserChoice Choice()
         {
             Console.WriteLine("1.Add a Question");
             Console.WriteLine("2.Start Quiz");
@@ -35,7 +35,7 @@ namespace QuizMaker
             Console.WriteLine("4.Load Questions from XML");
             Console.WriteLine("5.Quit\n");
 
-            if(Enum.TryParse(Console.ReadLine(), out UserChoices choice))
+            if(Enum.TryParse(Console.ReadLine(), out GetUserChoice choice))
             {
                 return choice;
             }
