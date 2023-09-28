@@ -102,25 +102,14 @@ namespace QuizMaker
         }
 
         /// <summary>
-        /// Prompt the user to enter a file name to save questions
+        /// Prompt the user to enter a file name to save or load questions
         /// </summary>
         /// <returns></returns>
         public static string InputFileName()
         {
-            Console.WriteLine("Enter a file name to save questions: \n");
+            Console.WriteLine("Enter file name \n");
             string saveFile = Console.ReadLine();
             return saveFile;
-        }
-
-        /// <summary>
-        /// Prompt the user to enter a file name to load questions
-        /// </summary>
-        /// <returns></returns>
-        public static string AskForFileName()
-        {
-            Console.WriteLine("Enter a file name to load questions: \n");
-            string loadFile = Console.ReadLine();
-            return loadFile;
         }
 
         /// <summary>

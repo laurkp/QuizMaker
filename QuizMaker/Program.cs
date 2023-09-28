@@ -31,7 +31,7 @@ namespace QuizMaker
                         Logic.SaveQuestions(saveFileName);
                         break;
                     case UIQuiz.GetUserChoice.LoadFromXml:
-                        string loadFileName = UIQuiz.AskForFileName();   
+                        string loadFileName = UIQuiz.InputFileName();   
                         Logic.LoadQuestions(loadFileName);
                         break;
                     case UIQuiz.GetUserChoice.Quit:
