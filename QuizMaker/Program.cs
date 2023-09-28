@@ -24,7 +24,7 @@ namespace QuizMaker
                         UIQuiz.AddQuestion();
                         break;
                     case UIQuiz.UserChoices.StartQuiz:
-                        Logic.StartQuiz();
+                        Logic.StartQuiz(questions);
                         break;
                     case UIQuiz.UserChoices.SaveToXml:
                         string saveFileName = UIQuiz.InputFileName();

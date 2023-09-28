@@ -13,7 +13,7 @@ namespace QuizMaker
         /// Serialize and save the questions to a file with the given filename
         /// </summary>
         /// <param name="filename"></param>
-        public static void SaveQuestions( string filename)
+        public static void SaveQuestions(string filename)
         {
             try
             {
@@ -23,7 +23,7 @@ namespace QuizMaker
                 Directory.CreateDirectory(folderPath);
                 string fullPath = Path.Combine(folderPath, filename);
                 using (FileStream stream = new FileStream(fullPath, FileMode.Create))
-                {
+                {  
                     serializer.Serialize(stream, Program.questions);
                 }
 
@@ -71,11 +71,11 @@ namespace QuizMaker
         /// <summary>
         /// Start the quiz session
         /// </summary>
-        public static void StartQuiz()
+        public static void StartQuiz(List<Question> quizQuestions)
         {
             int score = 0;
 
-            if (Program.questions.Count == 0)
+            if (quizQuestions.Count == 0)
             {
                 UIQuiz.NoQuestions();
                 return;
@@ -85,20 +85,16 @@ namespace QuizMaker
 
             int numRounds = UIQuiz.NumberOfRounds();
 
-            if (numRounds < 1 || numRounds > Program.questions.Count)
+            if (numRounds < 1 || numRounds > quizQuestions.Count)
             {
                 UIQuiz.InvalidNumberOfRounds();
                 return;
             }
 
-            List<Question> questionsToAsk = new List<Question>(Program.questions);
+            List<Question> questionsToAsk = new List<Question>(quizQuestions);
 
             for (int i = 0; i < numRounds; i++)
             {
-                if (questionsToAsk.Count == 0)
-                {
-                    questionsToAsk = new List<Question>(Program.questions);
-                } 
 
                 int randomIndex = random.Next(questionsToAsk.Count);
                 Question question = questionsToAsk[randomIndex];
