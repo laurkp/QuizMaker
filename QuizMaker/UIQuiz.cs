@@ -10,6 +10,7 @@ namespace QuizMaker
     {
         public const char USER_CHOICE_YES = 'Y';
         public const char USER_CHOICE_NO = 'N';
+
         /// <summary>
         /// enum to distinguish the user choices
         /// </summary>
@@ -21,6 +22,7 @@ namespace QuizMaker
             LoadFromXml,
             Quit 
         }
+
         /// <summary>
         /// Display the main menu and return the user's choice
         /// </summary>
@@ -98,6 +100,7 @@ namespace QuizMaker
 
             Program.Questions.Add(newQuestion);
         }
+
         /// <summary>
         /// Prompt the user to enter a file name to save questions
         /// </summary>
@@ -108,6 +111,7 @@ namespace QuizMaker
             string saveFile = Console.ReadLine();
             return saveFile;
         }
+
         /// <summary>
         /// Prompt the user to enter a file name to load questions
         /// </summary>
